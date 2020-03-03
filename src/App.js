@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import { Route } from 'react-router-dom';
 
-import Login from './Forms/Login';
-import Register from './Forms/Register'
+import Login from './Components/Forms/Login';
+import Register from './Components/Forms/Register'
 
 function App() {
   return (
