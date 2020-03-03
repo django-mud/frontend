@@ -4,7 +4,6 @@ import axiosWithAuth from '../Auth/AxiosWithAuth'
 const Login = props => {
     const [user, setUser] = useState('');
     const [pass, setPass] = useState('');
-    const [email, setEmail] = useState('');
 
     const userHandler = e => {
         setUser(e.target.value)
@@ -12,10 +11,6 @@ const Login = props => {
 
     const passHandler = e => {
         setPass(e.target.value)
-    }
-
-    const emailHandler = e => {
-        setEmail(e.target.value)
     }
 
     const loginHandler = e => {
@@ -41,8 +36,6 @@ const Login = props => {
                 <input type='text' name='username' value={user} onChange={userHandler} placeholder='username' />
                 <p>Password</p>
                 <input type='password' name='password' value={pass} onChange={passHandler} placeholder='password' />
-                <p>Email</p>
-                <input type='email' name='email' value={email} onChange={emailHandler} placeholder='email' />
                 <button>Login</button>
             </form>
         </div>

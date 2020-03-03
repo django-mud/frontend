@@ -4,7 +4,34 @@ const Register = props => {
     const [user, setUser] = useState('');
     const [pass1, setPass1] = useState('');
     const [pass2, setPass2] = useState('');
-    const [email, setEmail] = useState('');
+
+    const userHandler = e => {
+        setUser(e.target.value)
+    }
+
+    const pass1Handler = e => {
+        setPass1(e.target.value)
+    }
+
+    const pass2Handler = e => {
+        setPass2(e.target.value)
+    }
+
+    const registerHandler = e => {
+        e.preventDefault();
+
+        const credentials = {
+            username: user,
+            password: pass
+        }
+
+        axiosWithAuth()
+        .post('/api/login', credentials)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+    }
 
     return (
         <div>
@@ -15,8 +42,6 @@ const Register = props => {
                 <input type='password' name='password' value={pass1} placeholder='password' />
                 <p>Re-type Password</p>
                 <input type='re-type password' name='re-type password' value={pass2} placeholder='re-type password' />
-                <p>Email</p>
-                <input type='email' name='email' value={email} placeholder='email' />
                 <button>Register</button> 
             </form>
         </div>
