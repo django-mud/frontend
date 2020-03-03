@@ -1,7 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Route } from 'react-router-dom';
+
+import Login from './Forms/Login';
+import Register from './Forms/Register'
 
 function App() {
   return (
