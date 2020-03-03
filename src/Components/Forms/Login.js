@@ -25,6 +25,7 @@ const Login = props => {
         .post('/api/login/', credentials)
         .then(res => {
             localStorage.setItem('token', res.data.key)
+            props.history.push('/mud')
         })
         .catch(err => console.log(err))
     }
