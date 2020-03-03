@@ -28,9 +28,10 @@ const Register = props => {
         }
 
         axiosWithAuth()
-        .post('/api/registration', credentials)
+        .post('/api/registration/', credentials)
         .then(res => {
-            console.log(res.data.key)
+            localStorage.setItem('token', res.data.key)
+
         })
         .catch(err => console.log(err))
     }
