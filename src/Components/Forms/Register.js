@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axiosWithAuth from '../Auth/AxiosWithAuth'
 
 const Register = props => {
     const [user, setUser] = useState('');
@@ -22,26 +23,27 @@ const Register = props => {
 
         const credentials = {
             username: user,
-            password: pass
+            password1: pass1,
+            password2: pass2
         }
 
         axiosWithAuth()
-        .post('/api/login', credentials)
+        .post('/api/registration', credentials)
         .then(res => {
-            console.log(res)
+            console.log(res.data.key)
         })
         .catch(err => console.log(err))
     }
 
     return (
         <div>
-            <form>
+            <form onSubmit={registerHandler}>
                 <p>Username</p>
-                <input type='text' name='user' value={user} placeholder='username' />
+                <input type='text' name='user' value={user} onChange={userHandler} placeholder='username' />
                 <p>Password</p>
-                <input type='password' name='password' value={pass1} placeholder='password' />
+                <input type='password' name='password' value={pass1} onChange={pass1Handler} placeholder='password' />
                 <p>Re-type Password</p>
-                <input type='re-type password' name='re-type password' value={pass2} placeholder='re-type password' />
+                <input type='password' name='re-type password' value={pass2} onChange={pass2Handler} placeholder='re-type password' />
                 <button>Register</button> 
             </form>
         </div>
