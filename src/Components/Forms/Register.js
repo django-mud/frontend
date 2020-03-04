@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axiosWithAuth from '../Auth/AxiosWithAuth'
+import axios from 'axios'
 
 const Register = props => {
     const [user, setUser] = useState('');
@@ -27,8 +27,8 @@ const Register = props => {
             password2: pass2
         }
 
-        axiosWithAuth()
-        .post('/api/registration/', credentials)
+        axios
+        .post('https://mudgame-cs26.herokuapp.com/api/registration/', credentials)
         .then(res => {
             localStorage.setItem('token', res.data.key)
             props.history.push('mud')

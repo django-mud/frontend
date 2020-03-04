@@ -4,9 +4,10 @@ const axiosWithAuth = () => {
     const token = localStorage.getItem('token');
 
     return axios.create({
-        baseURL: 'https://lambda-mud-test.herokuapp.com',
+        baseURL: 'https://mudgame-cs26.herokuapp.com',
         headers: {
-            Authorization: token
+            'Content-Type': 'application/json',
+            Authorization: `Token ${token}`
         }
     });
 };
