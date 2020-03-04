@@ -17,7 +17,7 @@ const Mud = props => {
     return(
         <>
         <div>UI will go here</div>
-        <GameNav />
+        <GameNav setRoom={setRoom}/>
         </>
     )
 }
