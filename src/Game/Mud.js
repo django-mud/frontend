@@ -31,7 +31,7 @@ const UiDiv2 = styled.div`
 const Mud = () => {
     const [room, setRoom] = useState(null)
     const [rooms, setRooms] = useState(null)
-
+    console.log('room', room)
     useEffect(() => {
         axiosWithAuth()
         .get('/api/adv/init/')
@@ -60,7 +60,7 @@ const Mud = () => {
         <UiDiv1 className="uidiv1">
             {rooms ? <Map rooms={rooms}/> : null}
             <UiDiv2 className="uidiv2">
-                {room && room.title ? <InfoDiv>Current room: {room.title} <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
+                {room && room.title ? <InfoDiv>Current room: {room.title} <br/> <br/> <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
                 <GameNav setRoom={setRoom}/>
                 {room && room.error_msg ? <InfoDiv>Hey! {room.error_msg}</InfoDiv> : null }
             </UiDiv2>
