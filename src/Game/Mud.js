@@ -29,7 +29,7 @@ const Mud = () => {
             console.log('init res', res)
             // reverse y for canvas and save rooms to state
             for (let i = 0; i < res.data.all_rooms.length; i++) {
-                res.data.all_rooms.y *= -1
+                res.data.all_rooms[i].y *= -1
             }
             setRooms(res.data.all_rooms)
 
