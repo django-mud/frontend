@@ -37,7 +37,7 @@ const Mud = props => {
         <div>World Map</div>
         < br/>
         {rooms ? <Map rooms={rooms}/> : null}
-        {room && room.title ? <div>Current room: {room.title} <br/> {room.description}</div> : null}
+        {room && room.title ? <div>Current room: {room.room_id} {room.title} <br/> {room.description}</div> : null}
         <GameNav setRoom={setRoom}/>
         {room && room.error_msg ? <div>Hey! {room.error_msg}</div> : null}
         </>
