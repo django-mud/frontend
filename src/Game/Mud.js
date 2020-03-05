@@ -12,10 +12,20 @@ const TitleDiv = styled.div`
     font-size: 1.2rem;
 `
 const InfoDiv = styled.div`
-    margin: 2rem;
-    width: 800px;
-    height: 70px;
+    width: 100%;
     text-align: center;
+`
+const UiDiv1 = styled.div`
+    display: flex;
+    width: 100%;
+    padding-left: 1rem;
+`
+const UiDiv2 = styled.div`
+    width: 50%;
+    padding: 1.2rem 0 1.2rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
 
 const Mud = () => {
@@ -47,12 +57,14 @@ const Mud = () => {
         <>
         <LoggedInHeader />
         <TitleDiv>World Map</TitleDiv>
-        {rooms ? <Map rooms={rooms}/> : null}
-        <div>
-            {room && room.title ? <InfoDiv>Current room: {room.title} <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv>}
-            <GameNav setRoom={setRoom}/>
-            {room && room.error_msg ? <InfoDiv>Hey! {room.error_msg}</InfoDiv> : <InfoDiv> </InfoDiv>}
-        </div>
+        <UiDiv1 className="uidiv1">
+            {rooms ? <Map rooms={rooms}/> : null}
+            <UiDiv2 className="uidiv2">
+                {room && room.title ? <InfoDiv>Current room: {room.title} <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
+                <GameNav setRoom={setRoom}/>
+                {room && room.error_msg ? <InfoDiv>Hey! {room.error_msg}</InfoDiv> : null }
+            </UiDiv2>
+        </UiDiv1>
         </>
     )
 }
