@@ -20,6 +20,9 @@ const Logout = styled.button`
     position: absolute;
     right: 2.2rem;
     font-family: 'Press Start 2P', cursive;
+    &: hover {
+        color: grey;
+    }
 `
 
 export const LogInHeader = () => {

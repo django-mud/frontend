@@ -15,6 +15,11 @@ const InfoDiv = styled.div`
     width: 100%;
     text-align: center;
 `
+const InfoDiv2 = styled.div`
+    width: 100%;
+    text-align: center;
+    color: red;
+`
 const UiDiv1 = styled.div`
     display: flex;
     width: 100%;
@@ -25,12 +30,16 @@ const UiDiv2 = styled.div`
     padding: 1.2rem 0 1.2rem 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+`
+const UiDiv3 = styled.div`
+    display: flex;
 `
 
 const Mud = () => {
     const [room, setRoom] = useState(null)
     const [rooms, setRooms] = useState(null)
+    const [currentPlayers, setCurrentPlayers] = useState([])
     console.log('room', room)
     useEffect(() => {
         axiosWithAuth()
@@ -52,6 +61,18 @@ const Mud = () => {
         .catch(err => console.log(err))
     }, [])
 
+    useEffect(() => {
+        let tempCurrentPlayers = []
+        if (room && room.players) {
+            for (let i = 0; i < room.players.length; i++) {
+                tempCurrentPlayers.push(room.players[i])
+                setCurrentPlayers(tempCurrentPlayers)
+            }
+        } else {
+            setCurrentPlayers(['You are alone in this room.'])
+        }
+    }, [room])
+
     
     return(
         <>
@@ -61,8 +82,16 @@ const Mud = () => {
             {rooms ? <Map rooms={rooms}/> : null}
             <UiDiv2 className="uidiv2">
                 {room && room.title ? <InfoDiv>Current room: #{room.room_id}, {room.title} <br/> <br/> <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
+                <UiDiv3>
                 <GameNav setRoom={setRoom}/>
-                {room && room.error_msg ? <InfoDiv>Hey! {room.error_msg}</InfoDiv> : null }
+                <div>
+                    <InfoDiv>Players Present: </InfoDiv>
+                    <ul>
+                        {currentPlayers.map((player) => <li key={player}>{player}</li>)}
+                    </ul>
+                </div>
+                </UiDiv3>
+                {room && room.error_msg ? <InfoDiv2>Hey! {room.error_msg}</InfoDiv2> : null }
             </UiDiv2>
         </UiDiv1>
         </>
