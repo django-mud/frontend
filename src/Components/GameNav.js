@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axiosWithAuth from './Auth/AxiosWithAuth'
 
 const GameNav = props => {
@@ -11,7 +11,10 @@ const GameNav = props => {
 
         axiosWithAuth()
         .post('/api/adv/move/', move)
-        .then(res => props.setRoom(res.data))
+        .then(res => {
+            console.log('move endpoint', res)
+            props.setRoom(res.data)
+        })
         .catch(err => console.log(err))
 
     }
