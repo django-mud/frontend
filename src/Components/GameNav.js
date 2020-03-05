@@ -1,5 +1,14 @@
 import React from 'react';
 import axiosWithAuth from './Auth/AxiosWithAuth'
+import styled from 'styled-components';
+
+const NavButton = styled.button`
+    height: 3rem;
+    width: 6rem;
+    margin: .6rem;
+    border-radius: 5px;
+    font-family: 'Press Start 2P', cursive;
+`
 
 const GameNav = props => {
 
@@ -22,14 +31,14 @@ const GameNav = props => {
     return (
         <div>
             <div>
-                <button onClick={directionHandler}>North</button>
+                <NavButton onClick={directionHandler}>North</NavButton>
             </div>
             <div>
-                <button onClick={directionHandler}>West</button>
-                <button onClick={directionHandler}>East</button>
+                <NavButton onClick={directionHandler}>West</NavButton>
+                <NavButton onClick={directionHandler}>East</NavButton>
             </div>
             <div>
-                <button onClick={directionHandler}>South</button>
+                <NavButton onClick={directionHandler}>South</NavButton>
             </div>
         </div>
     )
