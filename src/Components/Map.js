@@ -60,7 +60,7 @@ const Map = props => {
   }, [rooms])
 
     return(
-      <canvas id="map" width="300" height="300"></canvas>
+      <canvas id="map" width="600" height="600"></canvas>
     )
 }
 

@@ -16,7 +16,7 @@ const Mud = props => {
             console.log('init res', res)
             // reverse y for canvas and save rooms to state
             for (let i = 0; i < res.data.all_rooms.length; i++) {
-                res.data.all_rooms.y *= -1
+                res.data.all_rooms[i].y *= -1
             }
             setRooms(res.data.all_rooms)
 
@@ -33,7 +33,9 @@ const Mud = props => {
     return(
         <>
         <LoggedInHeader />
+        < br/>
         <div>World Map</div>
+        < br/>
         {rooms ? <Map rooms={rooms}/> : null}
         {room && room.title ? <div>Current room: {room.title} <br/> {room.description}</div> : null}
         <GameNav setRoom={setRoom}/>
