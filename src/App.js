@@ -6,14 +6,11 @@ import Login from './Components/Forms/Login';
 import Register from './Components/Forms/Register';
 import Private from './Components/Auth/PrivateRoute';
 import Mud from './Game/Mud'
-import Header from './Components/Header';
 
 function App() {
   return (
     <div className="App">
-
-      <Header />
-      
+    
       <Route exact path='/' component={Login} />
 
       <Route path='/register' component={Register} />

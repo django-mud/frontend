@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios'
+import { LogInHeader } from '../Headers';
 
 const Register = props => {
     const [user, setUser] = useState('');
@@ -37,6 +38,8 @@ const Register = props => {
     }
 
     return (
+        <>
+        <LogInHeader />
         <div>
             <form onSubmit={registerHandler}>
                 <p>Username</p>
@@ -48,6 +51,7 @@ const Register = props => {
                 <button>Register</button> 
             </form>
         </div>
+        </>
     )
 };
 

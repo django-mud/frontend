@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axiosWithAuth from '../Components/Auth/AxiosWithAuth';
 
+import { LoggedInHeader } from '../Components/Headers'
 import GameNav from '../Components/GameNav'
 
 const Mud = props => {
@@ -16,6 +17,7 @@ const Mud = props => {
     })
     return(
         <>
+        <LoggedInHeader />
         <div>UI will go here</div>
         <GameNav setRoom={setRoom}/>
         </>
