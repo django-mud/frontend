@@ -6,8 +6,10 @@ const NavButton = styled.button`
     height: 3rem;
     width: 6rem;
     margin: .6rem;
+    outline: 0;
     border-radius: 5px;
     font-family: 'Press Start 2P', cursive;
+    font-size: .8rem;
 `
 
 const GameNav = props => {
