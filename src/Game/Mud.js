@@ -54,6 +54,7 @@ const Mud = () => {
 
             // set current room
             let current_room = {}
+            current_room.room_id = res.data.room_id
             current_room.title = res.data.title
             current_room.description = res.data.description
             setRoom(res.data)
@@ -63,6 +64,7 @@ const Mud = () => {
 
     useEffect(() => {
         let tempCurrentPlayers = []
+        // set players in current room to state
         if (room && room.players) {
             for (let i = 0; i < room.players.length; i++) {
                 tempCurrentPlayers.push(room.players[i])
