@@ -56,7 +56,7 @@ const Mud = () => {
             let current_room = {}
             current_room.title = res.data.title
             current_room.description = res.data.description
-            setRoom(res.data.title)
+            setRoom(res.data)
         })
         .catch(err => console.log(err))
     }, [])
