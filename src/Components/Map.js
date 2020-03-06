@@ -5,7 +5,6 @@ const Map = props => {
   let rooms = props.rooms
 
   useEffect(() => {
-    console.log('rooms in map component', rooms)
     var canvas = document.getElementById('map');
 
     const roomWidth = 40;
@@ -18,12 +17,14 @@ const Map = props => {
     // A canvas Y axis increases as it goes to the BOTTOM unlike a normal graph!
     // Top left is 0, 0
     let centerpoint = {
-      x: Math.round(canvas.width/2 - props.room.x * (roomWidth + roomPadding) - (roomWidth + roomPadding)/2),
-      y: Math.round(canvas.height/2 - props.room.y * (roomHeight + roomPadding) - (roomHeight + roomPadding)/2),
+      x: Math.round(canvas.width/2 - props.currentRoom.x * (roomWidth + roomPadding) - (roomWidth + roomPadding)/2),
+      y: Math.round(canvas.height/2 - props.currentRoom.y * (roomHeight + roomPadding) - (roomHeight + roomPadding)/2),
     };
     
     if (canvas.getContext) {
       var ctx = canvas.getContext('2d');
+      // Clear existing content 
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       // Set the outline color
       ctx.strokeStyle = 'black'
       // Set the font size and type
@@ -36,6 +37,9 @@ const Map = props => {
         const topOffset = centerpoint.y + rooms[i].y * (roomHeight + roomPadding) + roomPadding/2;
         // Set the color to fill the room
         ctx.fillStyle = 'blue';
+        if (props.currentRoom.id === rooms[i].id || props.currentRoom.room_id === rooms[i].id) {
+          ctx.fillStyle = 'red';
+        }
         // Fill the room rect
         ctx.fillRect(leftOffset, topOffset, roomWidth, roomHeight);
         // Outline the room rect
@@ -59,10 +63,10 @@ const Map = props => {
         }
       }
     }
-  }, [props.room])
+  })
 
     return(
-      <canvas id="map" width="300" height="300"></canvas>
+      <canvas id="map" width="600" height="600"></canvas>
     )
 }
 

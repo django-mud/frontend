@@ -55,29 +55,24 @@ const Mud = () => {
             console.log('init res', res)
             // reverse y for canvas and save rooms to state
             for (let i = 0; i < res.data.all_rooms.length; i++) {
-                if (res.data.all_rooms[i].id === res.data.room_id) {
+                res.data.all_rooms[i].y *= -1
+                if (res.data.all_rooms[i].id === res.data.room_id  || res.data.all_rooms[i].room_id === res.data.room_id) {
                     setRoom(res.data.all_rooms[i])
                 }
-                res.data.all_rooms[i].y *= -1
             }
             setRooms(res.data.all_rooms)
+            setCurrentPlayers(res.data.players)
         })
         .catch(err => console.log(err))
     }, [])
 
-    useEffect(() => {
-        let tempCurrentPlayers = []
-        // set players in current room to state
-        if (room && room.players) {
-            for (let i = 0; i < room.players.length; i++) {
-                tempCurrentPlayers.push(room.players[i])
-                setCurrentPlayers(tempCurrentPlayers)
+    const setCurrentRoom = (roomId) => {
+        for (let i = 0; i < rooms.length; i++) {
+            if (rooms[i].id === roomId) {
+                setRoom(rooms[i])
             }
-        } else {
-            setCurrentPlayers(['You are alone in this room.'])
         }
-    }, [room])
-
+    }
     
     return(
         <Container>
@@ -85,12 +80,12 @@ const Mud = () => {
             <TitleDiv>World Map</TitleDiv>
             <UiDiv1 className="uidiv1">
                 <div>
-                {rooms ? <Map rooms={rooms} room={room}/> : null}
+                {rooms ? <Map rooms={rooms} currentRoom={room}/> : null}
                 </div>
                 <UiDiv2 className="uidiv2">
-                    {room && room.title ? <InfoDiv>Current room: #{room.room_id}, {room.title} <br/> <br/> <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
+                    {room && room.title ? <InfoDiv>Current room: #{room.id}, {room.title} <br/> <br/> <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
                     <NavDiv>
-                        <GameNav setRoom={setRoom}/>
+                        <GameNav setCurrentRoom={setCurrentRoom} setCurrentPlayers={setCurrentPlayers}/>
                     </NavDiv>
                     <div>
                         <InfoDiv>Players Present: </InfoDiv>

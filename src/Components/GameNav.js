@@ -24,12 +24,13 @@ const GameNav = props => {
         .post('/api/adv/move/', move)
         .then(res => {
             console.log('move endpoint', res)
-            props.setRoom(res.data)
+            props.setCurrentRoom(res.data.id)
+            props.setCurrentPlayers(res.data.players)
         })
         .catch(err => console.log(err))
 
     }
-    
+
     return (
         <div>
             <div>
