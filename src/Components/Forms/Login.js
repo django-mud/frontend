@@ -11,7 +11,7 @@ const FormContainer = styled.div`
 
 const Form = styled.form`
     width: 25%;
-    height: 14rem;
+    height: 18rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,10 +32,15 @@ const Button = styled.button`
     font-family: 'Press Start 2P', cursive;
     width: 8rem;
     height: 2rem;
-    margin-top: 1.3rem;
+    margin-top: 1rem;
     border-radius: 5px;
     border: 1px solid black;
     outline: 0;
+`
+const Or = styled.p`
+    margin: 0;
+    font-size: .8rem;
+    margin-top: 1rem;
 `
 
 const Login = props => {
@@ -72,6 +77,11 @@ const Login = props => {
         })
     }
 
+    const registerHandler = e => {
+        e.preventDefault()
+        props.history.push('/register')
+    }
+
     return (
         <>
         <LogInHeader />
@@ -80,6 +90,8 @@ const Login = props => {
                 <Input type='text' name='username' value={user} onChange={userHandler} placeholder='username' />
                 <Input type='password' name='password' value={pass} onChange={passHandler} placeholder='password' />
                 <Button>Login</Button>
+                <Or>OR</Or>
+                <Button onClick={registerHandler}>Register</Button>
             </Form>
         </FormContainer>
         </>
