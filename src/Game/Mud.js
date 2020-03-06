@@ -6,6 +6,10 @@ import GameNav from '../Components/GameNav'
 import Map from '../Components/Map'
 import styled from 'styled-components';
 
+const Container = styled.div`
+    width: 100%;
+    margin: 0 auto;
+`
 const TitleDiv = styled.div`
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -22,7 +26,6 @@ const InfoDiv2 = styled.div`
 `
 const UiDiv1 = styled.div`
     display: flex;
-    width: 100%;
     padding-left: 1rem;
 `
 const UiDiv2 = styled.div`
@@ -30,10 +33,14 @@ const UiDiv2 = styled.div`
     padding: 1.2rem 0 1.2rem 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-evenly;
 `
-const UiDiv3 = styled.div`
-    display: flex;
+const PlayerList = styled.ul`
+    list-style: none;
+    padding-inline-start: 0;
+`
+const NavDiv = styled.div`
+    margin: 5rem 0 5rem 0;
 `
 
 const Mud = () => {
@@ -77,26 +84,26 @@ const Mud = () => {
 
     
     return(
-        <>
-        <LoggedInHeader />
-        <TitleDiv>World Map</TitleDiv>
-        <UiDiv1 className="uidiv1">
-            {rooms ? <Map rooms={rooms}/> : null}
-            <UiDiv2 className="uidiv2">
-                {room && room.title ? <InfoDiv>Current room: #{room.room_id}, {room.title} <br/> <br/> <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
-                <UiDiv3>
-                <GameNav setRoom={setRoom}/>
-                <div>
-                    <InfoDiv>Players Present: </InfoDiv>
-                    <ul>
-                        {currentPlayers.map((player) => <li key={player}>{player}</li>)}
-                    </ul>
-                </div>
-                </UiDiv3>
-                {room && room.error_msg ? <InfoDiv2>Hey! {room.error_msg}</InfoDiv2> : null }
-            </UiDiv2>
-        </UiDiv1>
-        </>
+        <Container>
+            <LoggedInHeader />
+            <TitleDiv>World Map</TitleDiv>
+            <UiDiv1 className="uidiv1">
+                {rooms ? <Map rooms={rooms}/> : null}
+                <UiDiv2 className="uidiv2">
+                    {room && room.title ? <InfoDiv>Current room: #{room.room_id}, {room.title} <br/> <br/> <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
+                    <NavDiv>
+                        <GameNav setRoom={setRoom}/>
+                    </NavDiv>
+                    <div>
+                        <InfoDiv>Players Present: </InfoDiv>
+                        <PlayerList>
+                            {currentPlayers.map((player) => <li key={player}>{player}</li>)}
+                        </PlayerList>
+                    </div>
+                    {room && room.error_msg ? <InfoDiv2>Hey! {room.error_msg}</InfoDiv2> : null }
+                </UiDiv2>
+            </UiDiv1>
+        </Container>
     )
 }
 
