@@ -55,16 +55,12 @@ const Mud = () => {
             console.log('init res', res)
             // reverse y for canvas and save rooms to state
             for (let i = 0; i < res.data.all_rooms.length; i++) {
+                if (res.data.all_rooms[i].id === res.data.room_id) {
+                    setRoom(res.data.all_rooms[i])
+                }
                 res.data.all_rooms[i].y *= -1
             }
             setRooms(res.data.all_rooms)
-
-            // set current room
-            let current_room = {}
-            current_room.room_id = res.data.room_id
-            current_room.title = res.data.title
-            current_room.description = res.data.description
-            setRoom(res.data)
         })
         .catch(err => console.log(err))
     }, [])
@@ -88,7 +84,9 @@ const Mud = () => {
             <LoggedInHeader />
             <TitleDiv>World Map</TitleDiv>
             <UiDiv1 className="uidiv1">
-                {rooms ? <Map rooms={rooms}/> : null}
+                <div>
+                {rooms ? <Map rooms={rooms} room={room}/> : null}
+                </div>
                 <UiDiv2 className="uidiv2">
                     {room && room.title ? <InfoDiv>Current room: #{room.room_id}, {room.title} <br/> <br/> <br/> {room.description}</InfoDiv> : <InfoDiv> </InfoDiv> }
                     <NavDiv>

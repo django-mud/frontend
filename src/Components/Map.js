@@ -7,18 +7,20 @@ const Map = props => {
   useEffect(() => {
     console.log('rooms in map component', rooms)
     var canvas = document.getElementById('map');
-    // A canvas X axis increases as it goes to the right like a normal graph
-    // A canvas Y axis increases as it goes to the BOTTOM unlike a normal graph!
-    // Top left is 0, 0
-    let centerpoint = {
-      x: 200,
-      y: 200
-    }
+
     const roomWidth = 40;
     const roomHeight = 40;
     
     // Pixels between rooms
     const roomPadding = 10;
+
+    // A canvas X axis increases as it goes to the right like a normal graph
+    // A canvas Y axis increases as it goes to the BOTTOM unlike a normal graph!
+    // Top left is 0, 0
+    let centerpoint = {
+      x: Math.round(canvas.width/2 - props.room.x * (roomWidth + roomPadding) - (roomWidth + roomPadding)/2),
+      y: Math.round(canvas.height/2 - props.room.y * (roomHeight + roomPadding) - (roomHeight + roomPadding)/2),
+    };
     
     if (canvas.getContext) {
       var ctx = canvas.getContext('2d');
@@ -57,10 +59,10 @@ const Map = props => {
         }
       }
     }
-  }, [rooms])
+  }, [props.room])
 
     return(
-      <canvas id="map" width="600" height="600"></canvas>
+      <canvas id="map" width="300" height="300"></canvas>
     )
 }
 
