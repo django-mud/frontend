@@ -1,6 +1,42 @@
 import React, {useState} from 'react'
 import axios from 'axios';
 import { LogInHeader } from '../Headers'
+import styled from 'styled-components';
+
+const FormContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+`
+
+const LoginForm = styled.form`
+    width: 25%;
+    height: 14rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    background: lightgray;
+`
+const LoginField = styled.input`
+    height: 2rem;
+    width: 12rem;
+    font-family: 'Press Start 2P', cursive;
+    margin: .5rem;
+    border: 1px solid black;
+    outline: 0;
+    text-indent: 5px;
+`
+const LoginButton = styled.button`
+    font-family: 'Press Start 2P', cursive;
+    width: 8rem;
+    height: 2rem;
+    margin-top: 1.3rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: 0;
+`
 
 const Login = props => {
     const [user, setUser] = useState('');
@@ -28,19 +64,24 @@ const Login = props => {
             localStorage.setItem('token', res.data.key)
             props.history.push('/mud')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            setUser('')
+            setPass('')
+            alert('Incorrect username/password. Please try again')
+        })
     }
 
     return (
         <>
         <LogInHeader />
-        <div>
-            <form onSubmit={loginHandler}>
-                <input type='text' name='username' value={user} onChange={userHandler} placeholder='username' />
-                <input type='password' name='password' value={pass} onChange={passHandler} placeholder='password' />
-                <button>Login</button>
-            </form>
-        </div>
+        <FormContainer>
+            <LoginForm onSubmit={loginHandler}>
+                <LoginField type='text' name='username' value={user} onChange={userHandler} placeholder='username' />
+                <LoginField type='password' name='password' value={pass} onChange={passHandler} placeholder='password' />
+                <LoginButton>Login</LoginButton>
+            </LoginForm>
+        </FormContainer>
         </>
     )
 }
