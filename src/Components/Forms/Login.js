@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import axios from 'axios';
-import { LogInHeader } from '../Headers'
+import { LogInHeader } from '../Headers';
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
@@ -9,7 +9,7 @@ const FormContainer = styled.div`
     margin-top: 5rem;
 `
 
-const LoginForm = styled.form`
+const Form = styled.form`
     width: 25%;
     height: 14rem;
     display: flex;
@@ -19,7 +19,7 @@ const LoginForm = styled.form`
     border: 1px solid black;
     background: lightgray;
 `
-const LoginField = styled.input`
+const Input = styled.input`
     height: 2rem;
     width: 12rem;
     font-family: 'Press Start 2P', cursive;
@@ -28,7 +28,7 @@ const LoginField = styled.input`
     outline: 0;
     text-indent: 5px;
 `
-const LoginButton = styled.button`
+const Button = styled.button`
     font-family: 'Press Start 2P', cursive;
     width: 8rem;
     height: 2rem;
@@ -76,11 +76,11 @@ const Login = props => {
         <>
         <LogInHeader />
         <FormContainer>
-            <LoginForm onSubmit={loginHandler}>
-                <LoginField type='text' name='username' value={user} onChange={userHandler} placeholder='username' />
-                <LoginField type='password' name='password' value={pass} onChange={passHandler} placeholder='password' />
-                <LoginButton>Login</LoginButton>
-            </LoginForm>
+            <Form onSubmit={loginHandler}>
+                <Input type='text' name='username' value={user} onChange={userHandler} placeholder='username' />
+                <Input type='password' name='password' value={pass} onChange={passHandler} placeholder='password' />
+                <Button>Login</Button>
+            </Form>
         </FormContainer>
         </>
     )

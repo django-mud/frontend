@@ -1,6 +1,51 @@
 import React, {useState} from 'react';
 import axios from 'axios'
 import { LogInHeader } from '../Headers';
+import styled from 'styled-components';
+
+const FormContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+`
+
+const Form = styled.form`
+    width: 25%;
+    height: 18rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    background: lightgray;
+`
+const Input = styled.input`
+    height: 2rem;
+    width: 12rem;
+    font-family: 'Press Start 2P', cursive;
+    margin: .5rem;
+    border: 1px solid black;
+    outline: 0;
+    text-indent: 5px;
+`
+const RegisterButton = styled.button`
+    font-family: 'Press Start 2P', cursive;
+    width: 8rem;
+    height: 2rem;
+    margin-top: 1.3rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: 0;
+`
+const BackButton = styled.button`
+    font-family: 'Press Start 2P', cursive;
+    width: 6rem;
+    height: 2rem;
+    margin-top: 1.3rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: 0;
+`
 
 const Register = props => {
     const [user, setUser] = useState('');
@@ -22,6 +67,13 @@ const Register = props => {
     const registerHandler = e => {
         e.preventDefault();
 
+        if (pass1 !== pass2) {
+            setPass1('')
+            setPass2('')
+            alert('Passwords don\'t match. Try again!')
+            return
+        }
+
         const credentials = {
             username: user,
             password1: pass1,
@@ -34,23 +86,30 @@ const Register = props => {
             localStorage.setItem('token', res.data.key)
             props.history.push('mud')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            console.log(err)
+            alert('There was a problem while creating your character. This character name may already be taken. Please try again.')
+        })
+    }
+
+    const backHandler = e => {
+        e.preventDefault()
+        props.history.push('/')
+
     }
 
     return (
         <>
         <LogInHeader />
-        <div>
-            <form onSubmit={registerHandler}>
-                <p>Username</p>
-                <input type='text' name='user' value={user} onChange={userHandler} placeholder='username' />
-                <p>Password</p>
-                <input type='password' name='password' value={pass1} onChange={pass1Handler} placeholder='password' />
-                <p>Re-type Password</p>
-                <input type='password' name='re-type password' value={pass2} onChange={pass2Handler} placeholder='re-type password' />
-                <button>Register</button> 
-            </form>
-        </div>
+        <FormContainer>
+            <Form onSubmit={registerHandler}>
+                <Input type='text' name='user' value={user} onChange={userHandler} placeholder='username' />
+                <Input type='password' name='password' value={pass1} onChange={pass1Handler} placeholder='password' />
+                <Input type='password' name='re-type password' value={pass2} onChange={pass2Handler} placeholder='re-type password' />
+                <RegisterButton>Register</RegisterButton>
+                <BackButton onClick={backHandler}>Back to Login</BackButton>
+            </Form>
+        </FormContainer>
         </>
     )
 };
